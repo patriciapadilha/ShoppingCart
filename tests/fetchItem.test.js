@@ -3,7 +3,6 @@ const { fetchItem } = require('../helpers/fetchItem');
 const item = require('../mocks/item');
 
 describe('2 - Teste a função fecthItem', () => {
-  // implemente seus testes aqui
   it('Verifica se fetchItem é uma função', async () => {
     await expect(typeof fetchItem).toMatch('function');
   });
@@ -24,6 +23,4 @@ describe('2 - Teste a função fecthItem', () => {
     const result = await fetchItem();
     expect(result).toEqual(new Error ('You must provide an url'));
   })
-
-
 });
