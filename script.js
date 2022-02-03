@@ -20,6 +20,7 @@ function createCustomElement(element, className, innerText) {
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
+  event.target.parentElement.removeChild(event.target);  
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -31,11 +32,11 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 
 async function getButton(event) {
-  const element = event.target.parentNode.firstChild.innerText;
+  const element = event.target.parentElement.firstChild.innerText;
   const itemId = await fetchItem(element);
   const { id, title, price } = itemId;
-  const item = document.querySelector('.cart__items');
-  item.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
+  const itemInCar = document.querySelector('.cart__items');
+  itemInCar.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
 }
 
 function createProductItemElement({ sku, name, image }) {
