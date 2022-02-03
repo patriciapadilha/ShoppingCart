@@ -1,8 +1,12 @@
 // const { fetchProducts } = require('./helpers/fetchProducts');
 
+// const saveCartItems = require("./helpers/saveCartItems");
+
 // const { fetchItem } = require("./helpers/fetchItem");
 
 // const { fetchProducts } = require("./helpers/fetchProducts");
+
+const ol = document.querySelector('.cart__items');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -19,8 +23,8 @@ function createCustomElement(element, className, innerText) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
   event.target.parentElement.removeChild(event.target);  
+  saveCartItems(ol.innerHTML);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -31,12 +35,13 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-async function getButton(event) {
+async function addToCart(event) {
   const element = event.target.parentElement.firstChild.innerText;
   const itemId = await fetchItem(element);
   const { id, title, price } = itemId;
   const itemInCar = document.querySelector('.cart__items');
   itemInCar.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
+  saveCartItems(ol.innerHTML);
 }
 
 function createProductItemElement({ sku, name, image }) {
@@ -47,7 +52,7 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   const button = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
-  button.addEventListener('click', getButton);
+  button.addEventListener('click', addToCart);
   section.appendChild(button);
   
   return section;
@@ -66,6 +71,13 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+function removeCartItems() {
+  const allCartItems = [...document.querySelector('ol').children];
+  allCartItems.forEach((element) => element.addEventListener('click', cartItemClickListener));
+}
+
 window.onload = async () => {
   addProducts();
+  getSavedCartItems();
+  removeCartItems();
 };
