@@ -76,8 +76,18 @@ function removeCartItems() {
   allCartItems.forEach((element) => element.addEventListener('click', cartItemClickListener));
 }
 
+function clearCartButton() {
+  const cartItems = document.querySelector('.cart__items');
+  const button = document.querySelector('.empty-cart');
+  button.addEventListener('click', () => {
+    cartItems.innerHTML = '';
+    localStorage.clear();
+  });
+}
+
 window.onload = async () => {
   addProducts();
   getSavedCartItems();
   removeCartItems();
+  clearCartButton();
 };
