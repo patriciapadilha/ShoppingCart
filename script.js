@@ -2,12 +2,13 @@ function getPricesInCart() {
   const cartList = document.getElementsByClassName('cart__items')[0];
   const total = document.getElementsByClassName('total-price')[0];
   const prices = cartList.childNodes;
-  let sum = 0;
+  let result = 0;
   prices.forEach((element) => {
     const price = element.innerHTML.split('PRICE: $');
-    sum += parseFloat(price[1]);
+    console.log(price);
+    result += parseFloat(price[1]);
   });
-  total.innerHTML = sum;
+  total.innerHTML = result;
 }
 
 function createProductImageElement(imageSource) {
