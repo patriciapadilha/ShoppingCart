@@ -1,3 +1,15 @@
+function getPricesInCart() {
+  const cartList = document.getElementsByClassName('cart__items')[0];
+  const total = document.getElementsByClassName('total-price')[0];
+  const prices = cartList.childNodes;
+  let sum = 0;
+  prices.forEach((element) => {
+    const price = element.innerHTML.split('PRICE: $');
+    sum += parseFloat(price[1]);
+  });
+  total.innerHTML = sum;
+}
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -16,6 +28,7 @@ function cartItemClickListener(event) {
   const ol = document.querySelector('ol');
   event.target.parentElement.removeChild(event.target);  
   saveCartItems(ol.innerHTML);
+  getPricesInCart();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -34,19 +47,18 @@ async function addToCart(event) {
   const itemInCar = document.querySelector('.cart__items');
   itemInCar.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
   saveCartItems(ol.innerHTML);
+  getPricesInCart();
 }
 
 function createProductItemElement({ sku, name, image }) {
   const section = document.createElement('section');
   section.className = 'item';
-  
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   const button = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
   button.addEventListener('click', addToCart);
   section.appendChild(button);
-  
   return section;
 }
 
@@ -66,6 +78,7 @@ function getSkuFromProductItem(item) {
 function removeCartItems() {
   const allCartItems = [...document.querySelector('ol').children];
   allCartItems.forEach((element) => element.addEventListener('click', cartItemClickListener));
+  getPricesInCart();
 }
 
 function clearCartButton() {
@@ -74,6 +87,7 @@ function clearCartButton() {
   button.addEventListener('click', () => {
     cartItems.innerHTML = '';
     localStorage.clear();
+    getPricesInCart();
   });
 }
 
@@ -83,7 +97,6 @@ function loadingApi() {
   h1.classList.add('loading');
   h1.innerHTML = 'Carregando...';
   div.appendChild(h1);
-  console.log(h1);
 }
 
 function removeLoading() {
@@ -100,4 +113,5 @@ window.onload = () => {
   getSavedCartItems();
   removeCartItems();
   clearCartButton();
+  getPricesInCart();
 };
