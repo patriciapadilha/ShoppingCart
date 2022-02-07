@@ -77,8 +77,26 @@ function clearCartButton() {
   });
 }
 
-window.onload = async () => {
-  addProducts();
+function loadingApi() {
+  const div = document.querySelector('.loadAPI');
+  const h1 = document.createElement('h1');
+  h1.classList.add('loading');
+  h1.innerHTML = 'Carregando...';
+  div.appendChild(h1);
+  console.log(h1);
+}
+
+function removeLoading() {
+  setTimeout(() => {
+    const h1 = document.querySelector('.loading');
+    h1.remove();
+    addProducts();
+  }, 3000);
+}
+
+window.onload = () => {
+  loadingApi();
+  removeLoading();
   getSavedCartItems();
   removeCartItems();
   clearCartButton();
