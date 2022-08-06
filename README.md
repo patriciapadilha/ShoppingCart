@@ -44,6 +44,6 @@ Requisitos:
 
 * Desenvolva testes para atingir 100% de cobertura total e 100% da função getSavedCartItems;
 
-[Deploy do projeto](https://to-do-list-nine-pink.vercel.app/)
+[Deploy do projeto](https://shopping-cart-iota-one.vercel.app/)
 
 <img width="500px" alt="imagem da aplicação com o pixel bord" src="image/tela.png">
