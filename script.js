@@ -8,7 +8,7 @@ function getPricesInCart() {
     console.log(price);
     result += parseFloat(price[1]);
   });
-  total.innerHTML = result;
+  total.innerHTML = result.toFixed(2);
 }
 
 function createProductImageElement(imageSource) {
