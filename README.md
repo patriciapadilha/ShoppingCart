@@ -46,4 +46,4 @@ Requisitos:
 
 [Deploy do projeto](https://shopping-cart-iota-one.vercel.app/)
 
-<img width="500px" alt="imagem da aplicação com o pixel bord" src="image/tela.png">
+<img width="500px" alt="imagem da aplicação" src="image/tela.png">
